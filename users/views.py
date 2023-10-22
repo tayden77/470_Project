@@ -14,13 +14,6 @@ def register_view(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
-            confirmation = form.cleaned_data.get('confirmation')
-
-            # Ensure password matches confirmation
-            if password != confirmation:
-                return render(request, "users/register.html", {
-                    "message": "Passwords must match."
-                })
 
             # Attempt to create a new user
             try:
@@ -45,7 +38,7 @@ def login_view(request):
         form = LoginForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect('profile.html')
+            return redirect('users-profile')
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
