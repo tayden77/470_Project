@@ -27,7 +27,7 @@ def register_view(request):
             login(request, user)
             return redirect('users-profile')
         else:
-            return render(request, "users/register.html", {'form': form})
+            return render(request, "users/register.html")
     else:
         form = SignUpForm()
         return render(request, "users/register.html", {'form': form})
