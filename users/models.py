@@ -14,6 +14,7 @@ GOAL_STATUS = (
     ('failed', 'Failed'),
 )
 
+"""
 class User(models.Model):
     username = models.CharField(unique=True, max_length=30)
     email = models.EmailField(unique=True)
@@ -33,7 +34,7 @@ class User(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.profile_picture.path)
-
+"""
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
