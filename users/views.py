@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from django.http import HttpResponse
-from .forms import SignUpForm, LoginForm
+from .forms import LoginForm, UserCreationForm, UserRegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 def register_view(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            # Get the details from the form
+            form.save()
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
@@ -29,8 +30,8 @@ def register_view(request):
         else:
             return render(request, "users/register.html")
     else:
-        form = SignUpForm()
-        return render(request, "users/register.html", {'form': form})
+        form = UserRegisterForm()
+    return render(request, 'users/register.html', {'form': form})
 
 
 def login_view(request):
